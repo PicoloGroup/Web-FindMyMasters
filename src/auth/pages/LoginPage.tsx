@@ -1,7 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  Button, CircularProgress, TextField, Alert, AlertTitle,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
+import useLogin from '../hooks/useLogin';
+import logoFullPng from '../../resources/logo_full.png';
+import logoFullWebp from '../../resources/logo_full.webp';
 import logoSvg from "../../resources/logo.svg";
+import { validateEmail, validatePassword } from '../../util/validators';
 
 const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
+
+  const {
+    mutate: login, status, data, error,
+  } = useLogin();
+
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const emailErr = validateEmail(email);
+    setEmailError(emailErr);
+    const passwordErr = validatePassword(password);
+    setPasswordError(passwordErr);
+
+    if (emailErr !== '' || passwordErr !== '') {
+      return;
+    }
+
+    login({
+      email,
+      password,
+    });
+  };
+  
+  let alertElement = null;
+
+  if (status === 'error') {
+    alertElement = (
+      <Alert severity="error" className="mb-4 w-full">
+        <AlertTitle>Giriş Başarısız</AlertTitle>
+        {error?.message}
+      </Alert>
+    );
+  } else if (status === 'success' && data !== undefined) {
+    // this will be most of the time unseen since redirection is instant
+    // however, still useful for testing
+    alertElement = (
+      <Alert severity="success" className="mb-4 w-full">
+        <AlertTitle>Giriş Başarılı</AlertTitle>
+        Ana sayfaya yönlendiriliyorsunuz...
+      </Alert>
+    );
+  }
+
   return (
     <>
       <div className="min-h-full min-h-screen flex">
@@ -23,7 +80,8 @@ const LoginPage: React.FC = () => {
 
             <div className="mt-8">
               <div className="mt-6">
-                <form action="#" method="POST" className="space-y-6">
+              {alertElement}
+                <form className="space-y-6" onSubmit={submit}>
                   <div>
                     <label
                       htmlFor="email"
@@ -39,6 +97,9 @@ const LoginPage: React.FC = () => {
                         autoComplete="email"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        onBlur={() => setEmailError(validateEmail(email))}
                       />
                     </div>
                   </div>
@@ -55,9 +116,12 @@ const LoginPage: React.FC = () => {
                         id="password"
                         name="password"
                         type="password"
+                        value={password}
                         autoComplete="current-password"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                        onChange={(event) => setPassword(event.target.value)}
+                        onBlur={() => setPasswordError(validatePassword(password))}
                       />
                     </div>
                   </div>
