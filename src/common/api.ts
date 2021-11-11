@@ -6,7 +6,7 @@ export default axios.create({
   withCredentials: true,
   headers: {
     'X-Platform': 'WEB',
-    'X-App-Version': process.env.REACT_APP_VERSION,
+    'X-App-Version': process.env.REACT_APP_VERSION || "",
     'Content-Type': 'application/json',
   },
 });

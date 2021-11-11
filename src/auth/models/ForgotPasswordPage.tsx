@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import logoFullPng from '../../resources/logo_full.png';
 import logoFullWebp from '../../resources/logo_full.webp';
 import useForgotPassword from '../hooks/useForgotPassword';
-import { validateEmail } from '../../course/util/validators';
+import { validateEmail } from '../../util/validators';
 
 const useStyles = makeStyles(() => ({
   busyCard: {
