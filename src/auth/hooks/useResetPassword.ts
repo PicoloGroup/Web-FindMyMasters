@@ -9,11 +9,11 @@ const resetPassword: MutationFunction<void, ResetPasswordRequest> = (
   resetPasswordRequest: ResetPasswordRequest,
 ): Promise<void> => fetchPost<void>('/university-auth/reset-password', resetPasswordRequest)
   .pipe(
-    map(() => {}),
+    map(() => { }),
     catchApiError(),
   ).toPromise();
 
 const useResetPassword = (): UseMutationResult<void, ApiError,
-ResetPasswordRequest, unknown> => useMutation(resetPassword);
+  ResetPasswordRequest, unknown> => useMutation(resetPassword);
 
 export default useResetPassword;

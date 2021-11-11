@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import {
-  Button, CircularProgress, TextField, Alert, AlertTitle, FormControl, FormHelperText,
+  CircularProgress, Alert, AlertTitle, FormHelperText,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import { Link } from 'react-router-dom';
-import clsx from 'clsx';
 import useLogin from '../hooks/useLogin';
-import logoFullPng from '../../resources/logo_full.png';
-import logoFullWebp from '../../resources/logo_full.webp';
 import logoSvg from "../../resources/logo.svg";
 import { validateEmail, validatePassword } from '../../util/validators';
 
@@ -38,6 +33,21 @@ const LoginPage: React.FC = () => {
       password,
     });
   };
+
+  let progressElement = null;
+  if (status === 'loading') {
+    progressElement = (
+      <CircularProgress
+        style={{
+          position: 'absolute',
+          top: 'calc(50% - 32px)',
+          left: 'calc(50% - 32px)',
+        }}
+        size={64}
+        data-testid="progress-indicator"
+      />
+    );
+  }
 
   let alertElement = null;
 
@@ -80,6 +90,7 @@ const LoginPage: React.FC = () => {
 
             <div className="mt-8">
               <div className="mt-6">
+                {progressElement}
                 {alertElement}
                 <form className="space-y-6" onSubmit={submit}>
                   <div>
@@ -113,18 +124,18 @@ const LoginPage: React.FC = () => {
                       Password
                     </label>
                     <div className="mt-1">
-                        <input
-                          id="password"
-                          name="password"
-                          type="password"
-                          value={password}
-                          autoComplete="current-password"
-                          required
-                          className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                          onChange={(event) => setPassword(event.target.value)}
-                          onBlur={() => setPasswordError(validatePassword(password))}
-                        />
-                        <FormHelperText id="password-helper-text" error={passwordError != ''}>{passwordError}</FormHelperText>
+                      <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={password}
+                        autoComplete="current-password"
+                        required
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                        onChange={(event) => setPassword(event.target.value)}
+                        onBlur={() => setPasswordError(validatePassword(password))}
+                      />
+                      <FormHelperText id="password-helper-text" error={passwordError != ''}>{passwordError}</FormHelperText>
                     </div>
                   </div>
 

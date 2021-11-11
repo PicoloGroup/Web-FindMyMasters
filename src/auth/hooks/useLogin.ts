@@ -21,7 +21,7 @@ const login: MutationFunction<void, UserLoginRequest> = (
   ).toPromise();
 
 const useLogin = (): UseMutationResult<void, ApiError,
-UserLoginRequest, unknown> => {
+  UserLoginRequest, unknown> => {
   const queryClient = useQueryClient();
   return useMutation(login, {
     onSuccess: () => {
