@@ -101,6 +101,7 @@ const LoginPage: React.FC = () => {
                         onChange={(event) => setEmail(event.target.value)}
                         onBlur={() => setEmailError(validateEmail(email))}
                       />
+                      <FormHelperText id="email-helper-text" error={emailError != ''}>{emailError}</FormHelperText>
                     </div>
                   </div>
 
