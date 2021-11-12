@@ -54,7 +54,7 @@ const LoginPage: React.FC = () => {
   if (status === 'error') {
     alertElement = (
       <Alert severity="error" className="mb-4 w-full">
-        <AlertTitle>Giriş Başarısız</AlertTitle>
+        <AlertTitle>Login Failed</AlertTitle>
         {error?.message}
       </Alert>
     );
@@ -63,8 +63,8 @@ const LoginPage: React.FC = () => {
     // however, still useful for testing
     alertElement = (
       <Alert severity="success" className="mb-4 w-full">
-        <AlertTitle>Giriş Başarılı</AlertTitle>
-        Ana sayfaya yönlendiriliyorsunuz...
+        <AlertTitle>Login succesful</AlertTitle>
+        You're   redirected to home page.
       </Alert>
     );
   }

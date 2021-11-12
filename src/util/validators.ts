@@ -1,19 +1,12 @@
 import validator from 'validator';
 
 export const validateEmail = (email: string): string => {
-  if (!validator.isEmail(email)) return 'Lütfen geçerli bir email adresi gir.';
+  if (!validator.isEmail(email)) return 'Please enter a valid email address.';
   return '';
 };
 
 export const validatePassword = (password: string): string => {
-  if (!validator.isLength(password, { min: 8 })) return 'Şifren en az 8 karakterden oluşmalı.';
-  return '';
-};
-
-export const validateUsername = (username: string): string => {
-  if (username === '') return 'Lütfen bir kullanıcı adı gir.';
-  if (!validator.isLength(username, { max: 32 })) return 'Kullanıcı adı en fazla 32 karakterden oluşabilir.';
-  if (!validator.matches(username, RegExp('^[a-zA-Z0-9\\-_]+$'))) return 'Kullanıcı adı sadece harfler, rakamlar, tire (-) ve alt çizgi (_) içerebilir.';
+  if (!validator.isLength(password, { min: 8 })) return 'Password must be at least 8 character.';
   return '';
 };
 
