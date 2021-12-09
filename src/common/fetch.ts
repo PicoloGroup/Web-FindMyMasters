@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { Console } from 'console';
 import { from, Observable } from 'rxjs';
 import API from './api';
 
@@ -26,6 +27,7 @@ function fetchData<T>(
       }),
     );
   }
+  console.log(requestMethod, url, body);
   return from(
     API.request<T>({
       method: requestMethod,

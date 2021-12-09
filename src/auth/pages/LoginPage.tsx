@@ -4,12 +4,12 @@ import {
 } from '@mui/material';
 import useLogin from '../hooks/useLogin';
 import logoSvg from "../../resources/logo.svg";
-import { validateEmail, validatePassword } from '../../util/validators';
+import { validateUsername, validatePassword } from '../../util/validators';
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [emailError, setEmailError] = useState<string>('');
+  const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
 
   const {
@@ -19,17 +19,17 @@ const LoginPage: React.FC = () => {
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const emailErr = validateEmail(email);
-    setEmailError(emailErr);
+    const usernameErr = validateUsername(username);
+    setUsernameError(usernameErr);
     const passwordErr = validatePassword(password);
     setPasswordError(passwordErr);
 
-    if (emailErr !== '' || passwordErr !== '') {
+    if (usernameErr !== '' || passwordErr !== '') {
       return;
     }
 
     login({
-      email,
+      username,
       password,
     });
   };
@@ -54,7 +54,7 @@ const LoginPage: React.FC = () => {
   if (status === 'error') {
     alertElement = (
       <Alert severity="error" className="mb-4 w-full">
-        <AlertTitle>Giriş Başarısız</AlertTitle>
+        <AlertTitle>Login Failed</AlertTitle>
         {error?.message}
       </Alert>
     );
@@ -63,8 +63,8 @@ const LoginPage: React.FC = () => {
     // however, still useful for testing
     alertElement = (
       <Alert severity="success" className="mb-4 w-full">
-        <AlertTitle>Giriş Başarılı</AlertTitle>
-        Ana sayfaya yönlendiriliyorsunuz...
+        <AlertTitle>Login succesful</AlertTitle>
+        You're   redirected to home page.
       </Alert>
     );
   }
@@ -95,24 +95,24 @@ const LoginPage: React.FC = () => {
                 <form className="space-y-6" onSubmit={submit}>
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="username"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Email address
+                      Username
                     </label>
                     <div className="mt-1">
                       <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
+                        id="username"
+                        name="username"
+                        type="text"
+                        autoComplete="username"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        onBlur={() => setEmailError(validateEmail(email))}
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                        onBlur={() => setUsernameError(validateUsername(username))}
                       />
-                      <FormHelperText id="email-helper-text" error={emailError != ''}>{emailError}</FormHelperText>
+                      <FormHelperText id="email-helper-text" error={usernameError !== ''}>{usernameError}</FormHelperText>
                     </div>
                   </div>
 
@@ -135,7 +135,7 @@ const LoginPage: React.FC = () => {
                         onChange={(event) => setPassword(event.target.value)}
                         onBlur={() => setPasswordError(validatePassword(password))}
                       />
-                      <FormHelperText id="password-helper-text" error={passwordError != ''}>{passwordError}</FormHelperText>
+                      <FormHelperText id="password-helper-text" error={passwordError !== ''}>{passwordError}</FormHelperText>
                     </div>
                   </div>
 

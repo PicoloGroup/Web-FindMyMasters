@@ -10,7 +10,7 @@ import ApiError from '../../common/models/api-error';
 
 const login: MutationFunction<void, UserLoginRequest> = (
   loginRequest: UserLoginRequest,
-): Promise<void> => fetchPost<UserLoginResponse>('/user-auth/login', loginRequest)
+): Promise<void> => fetchPost<UserLoginResponse>('/auth/university/login', loginRequest)
   .pipe(
     map((response) => {
       if (response.data.token) {
