@@ -5,6 +5,7 @@ import {
 import useLogin from '../hooks/useLogin';
 import logoSvg from "../../resources/logo.svg";
 import { validateUsername, validatePassword } from '../../util/validators';
+import { Redirect } from 'react-router-dom'
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState<string>('');
@@ -15,6 +16,11 @@ const LoginPage: React.FC = () => {
   const {
     mutate: login, status, data, error,
   } = useLogin();
+
+  const token = localStorage.getItem("bearer")
+  const isLoggedIn = token !== null && token !== undefined
+  if(isLoggedIn)
+    return <Redirect to="/dashboard" />
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
