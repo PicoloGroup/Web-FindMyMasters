@@ -4,13 +4,17 @@ import LoginPage from './pages/LoginPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 
-const AuthContainer: React.FC = () => (
+interface AuthContainerParams {
+  match: {url: string}
+}
+
+const AuthContainer: React.FC<AuthContainerParams> = ({match}: AuthContainerParams) => (
   <Switch>
-    <Route exact path="/login" component={LoginPage} />
-    <Route exact path="/forgot-password" component={ForgotPasswordPage} />
-    <Route exact path="/reset-password" component={ResetPasswordPage} />
+    <Route exact path={`${match.url}/login`} component={LoginPage} />
+    <Route exact path={`${match.url}/forgot-password`} component={ForgotPasswordPage} />
+    <Route exact path={`${match.url}/reset-password`} component={ResetPasswordPage} />
     <Route path="*">
-      <Redirect to="/login" />
+      <Redirect to={`${match.url}/login`} />
     </Route>
   </Switch>
 );
