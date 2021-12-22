@@ -11,6 +11,7 @@ import {
   UserGroupIcon,
   ViewGridAddIcon,
   XIcon,
+  LogoutIcon
 } from '@heroicons/react/outline'
 import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
 import logoSvg from "../../resources/logo.svg";
@@ -20,18 +21,7 @@ const user = {
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Teams', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Directory', href: '#', icon: SearchCircleIcon, current: true },
-  { name: 'Announcements', href: '#', icon: SpeakerphoneIcon, current: false },
-  { name: 'Office Map', href: '#', icon: MapIcon, current: false },
-]
-const secondaryNavigation = [
-  { name: 'Apps', href: '#', icon: ViewGridAddIcon },
-  { name: 'Settings', href: '#', icon: CogIcon },
-]
+
 const tabs = [
   { name: 'Profile', href: '#', current: true },
   { name: 'Calendar', href: '#', current: false },
@@ -366,54 +356,52 @@ const DashboardHomePage: React.FC = () => {
                   <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
                     <div className="flex-shrink-0 flex items-center px-4">
                     <picture>
-                        <source srcSet={logoSvg} type="image/svg" />
-                        <img
-                        src={logoSvg}
-                        className="w-32"
-                        alt="Find My Masters Logo"
-                        />
+                      <source srcSet={logoSvg} type="image/svg" />
+                      <img
+                      src={logoSvg}
+                      className="w-16 flex-initial self-start"
+                      alt="Find My Masters Logo"
+                      />
                     </picture>
+                    <h2 className="flex-initial w-64 self-end text-lg font-medium text-gray-900">Find My Master's</h2>
+                  
+                    
                     </div>
                     <nav aria-label="Sidebar" className="mt-5">
                       <div className="px-2 space-y-1">
-                        {navigation.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
+                      <a key="Dashboard"
+                         href="#"
+                         className={classNames(
+                          true
+                              ? 'bg-gray-100 text-gray-900'
+                              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                            'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                          )}
+                          aria-current={true ? 'page' : undefined}
+                        >
+                          <HomeIcon
                             className={classNames(
-                              item.current
-                                ? 'bg-gray-100 text-gray-900'
-                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                              'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                              true ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                              'mr-4 h-6 w-6'
                             )}
-                            aria-current={item.current ? 'page' : undefined}
-                          >
-                            <item.icon
-                              className={classNames(
-                                item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                'mr-4 h-6 w-6'
-                              )}
-                              aria-hidden="true"
-                            />
-                            {item.name}
-                          </a>
-                        ))}
+                            aria-hidden="true"
+                          />
+                          {"Dashboard"}
+                        </a>
                       </div>
                       <hr className="border-t border-gray-200 my-5" aria-hidden="true" />
                       <div className="px-2 space-y-1">
-                        {secondaryNavigation.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
+                        <a
+                            key="Logout"
+                            href="#"
                             className="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md"
                           >
-                            <item.icon
+                            <LogoutIcon
                               className="text-gray-400 group-hover:text-gray-500 mr-4 flex-shrink-0 h-6 w-6"
                               aria-hidden="true"
                             />
-                            {item.name}
+                            Logout
                           </a>
-                        ))}
                       </div>
                     </nav>
                   </div>
@@ -442,58 +430,55 @@ const DashboardHomePage: React.FC = () => {
           <div className="hidden lg:flex lg:flex-shrink-0">
             <div className="flex flex-col w-64">
               {/* Sidebar component, swap this element with another sidebar if you like */}
-              <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-gray-100">
+              <div className="h-full w-64 fixed flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-gray-100">
                 <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                   <div className="flex items-center flex-shrink-0 px-4">
-                  <picture>
-                    <source srcSet={logoSvg} type="image/svg" />
-                    <img
-                    src={logoSvg}
-                    className="w-32"
-                    alt="Find My Masters Logo"
-                    />
-                </picture>
+                    <picture>
+                      <source srcSet={logoSvg} type="image/svg" />
+                      <img
+                      src={logoSvg}
+                      className="w-16 flex-initial self-start"
+                      alt="Find My Masters Logo"
+                      />
+                    </picture>
+                    <h2 className="flex-initial w-64 self-end text-lg font-medium text-gray-900">Find My Master's</h2>
                   </div>
                   <nav className="mt-5 flex-1" aria-label="Sidebar">
                     <div className="px-2 space-y-1">
-                      {navigation.map((item) => (
                         <a
-                          key={item.name}
-                          href={item.href}
+                          key="Dashboard"
+                          href="#"
                           className={classNames(
-                            item.current
+                            true
                               ? 'bg-gray-200 text-gray-900'
                               : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                             'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                           )}
-                          aria-current={item.current ? 'page' : undefined}
+                          aria-current={true ? 'page' : undefined}
                         >
-                          <item.icon
+                          <HomeIcon
                             className={classNames(
-                              item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                              true ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                               'mr-3 flex-shrink-0 h-6 w-6'
                             )}
                             aria-hidden="true"
                           />
-                          {item.name}
+                          Dashboard
                         </a>
-                      ))}
                     </div>
                     <hr className="border-t border-gray-200 my-5" aria-hidden="true" />
                     <div className="flex-1 px-2 space-y-1">
-                      {secondaryNavigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
+                       <a
+                          key="Logout"
+                          href="#"
                           className="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                         >
-                          <item.icon
+                          <LogoutIcon
                             className="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6"
                             aria-hidden="true"
                           />
-                          {item.name}
+                          Logout
                         </a>
-                      ))}
                     </div>
                   </nav>
                 </div>
@@ -516,16 +501,18 @@ const DashboardHomePage: React.FC = () => {
           <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
             <div className="lg:hidden">
               <div className="flex items-center justify-between bg-gray-50 border-b border-gray-200 px-4 py-1.5">
-                <div>
+                <div className='flex'>
                 <picture>
                     <source srcSet={logoSvg} type="image/svg" />
                     <img
                     src={logoSvg}
-                    className="w-32"
+                    className="w-12 flex-initial self-start"
                     alt="Find My Masters Logo"
                     />
                 </picture>
+                <h2 className="flex-initial w-48 self-end text-lg font-medium text-gray-900">Find My Master's</h2>
                 </div>
+                
                 <div>
                   <button
                     type="button"
