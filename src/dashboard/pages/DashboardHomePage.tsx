@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, MouseEventHandler, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   CalendarIcon,
@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/outline'
 import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
 import logoSvg from "../../resources/logo.svg";
+import useLogout from '../hooks/useLogout';
 
 const user = {
   name: 'Tom Cook',
@@ -307,6 +308,14 @@ function classNames(...classes: any[]) {
 const DashboardHomePage: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
+    const {
+      mutate: logout, status, data, error,
+    } = useLogout();
+
+    const logoutSubmit = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      logout({});
+    }
+
     return (
       <>
         <div className="h-full flex">
@@ -394,6 +403,7 @@ const DashboardHomePage: React.FC = () => {
                         <a
                             key="Logout"
                             href="#"
+                            onClick={logoutSubmit}
                             className="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md"
                           >
                             <LogoutIcon
@@ -471,6 +481,7 @@ const DashboardHomePage: React.FC = () => {
                        <a
                           key="Logout"
                           href="#"
+                          onClick={logoutSubmit}
                           className="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                         >
                           <LogoutIcon
