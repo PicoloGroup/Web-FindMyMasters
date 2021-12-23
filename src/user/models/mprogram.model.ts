@@ -1,4 +1,4 @@
-export interface University {
+export interface MasterProgram {
   id: number;
   name: string;
   language: string;
