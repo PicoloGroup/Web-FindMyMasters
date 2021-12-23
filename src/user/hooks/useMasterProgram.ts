@@ -13,6 +13,16 @@ import useUniversity from './useUniversity';
 import { GetMasterProgramsResponse } from '../models/response/GetMasterProgramsResponse';
 import { MasterProgram } from '../models/mprogram.model';
 import { GetMasterProgramResponse } from '../models/response/GetMasterProgramResponse';
+import masterPrograms from '../data/master-programs';
+
+const getMasterProgramMock = (
+  masterProgramId: number
+): Promise<GetMasterProgramResponse> => new Promise((resolve, reject) => {
+  if(masterProgramId >= masterPrograms.length) {
+    reject(null);
+  }
+  resolve(masterPrograms[masterProgramId])
+});
 
 const getMasterProgram = (
   masterProgramId: number,
@@ -23,7 +33,7 @@ const getMasterProgram = (
   ).toPromise();
 
 const useMasterProgram = (id: number): UseQueryResult<MasterProgram, ApiError> => {
-  return useQuery(["program", id], () => getMasterProgram(id), {
+  return useQuery(["program", id], () => getMasterProgramMock(id), {
     ...cachedQueryOptions
   });
 };
