@@ -20,12 +20,6 @@ import useUser from '../../user/hooks/useUser';
 import { CircularProgress } from '@mui/material';
 import useUniversity from '../../user/hooks/useUniversity';
 
-const mockUser = {
-  name: 'Tom Cook',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-
 const tabs = [
   { name: 'Profile', href: '#', current: true },
   { name: 'Calendar', href: '#', current: false },
@@ -684,7 +678,8 @@ const DashboardHomePage: React.FC = () => {
               <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
                 <div className="px-6 pt-6 pb-4">
                   <h2 className="text-lg font-medium text-gray-900">Applicants</h2>
-                  <p className="mt-1 text-sm text-gray-600">Search between 3,018 applicants</p>
+                  <p className="mt-1 text-sm text-gray-600">3,018 applicants to all master programs</p>
+                  {/* 
                   <form className="mt-6 flex space-x-4" action="#">
                     <div className="flex-1 min-w-0">
                       <label htmlFor="search" className="sr-only">
@@ -711,6 +706,7 @@ const DashboardHomePage: React.FC = () => {
                       <span className="sr-only">Search</span>
                     </button>
                   </form>
+                  */}
                 </div>
                 {/* Directory list */}
                 <nav className="flex-1 min-h-0 overflow-y-auto" aria-label="Directory">

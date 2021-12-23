@@ -10,6 +10,11 @@ import { cachedQueryOptions } from '../../common/queryOptions';
 import useUniversity from './useUniversity';
 import { GetMasterProgramsResponse } from '../models/response/GetMasterProgramsResponse';
 import { MasterProgram } from '../models/mprogram.model';
+import masterPrograms from '../data/master-programs';
+
+const getMasterProgramsMock = (
+  universityId: number
+): Promise<GetMasterProgramsResponse> => new Promise((resolve, reject) => resolve(masterPrograms))
 
 const getMasterPrograms = (
   universityId: number,
@@ -22,7 +27,7 @@ const getMasterPrograms = (
 const useMasterPrograms = (): UseQueryResult<MasterProgram[], ApiError> => {
   const {data: university} = useUniversity();
   const universityId = university?.id;
-  return useQuery(["university", universityId, "programs"], () => getMasterPrograms(universityId!), {
+  return useQuery(["university", universityId, "programs"], () => getMasterProgramsMock(universityId!), {
     ...cachedQueryOptions,
     enabled: !!universityId
   });
