@@ -3,5 +3,5 @@ export interface University {
   name: string;
   image: string;
   cityId: number;
-  rank: string;
+  rank: string | null;
 }

@@ -12,24 +12,24 @@ import { Student } from '../models/student.model';
 import { GetQuickApplicationsResponse } from '../models/response/GetQuickApplicationsResponse';
 import { QuickApplicaton } from '../models/quick-app.model';
 import useUniversity from './useUniversity';
-import { quickApplications } from '../data/applicants';
+import { directory, DirectoryType } from '../data/applicants';
 
-const getQuickApplicationsMock = (
+const getDirectoryMock = (
   universityId: number,
-): Promise<GetQuickApplicationsResponse> => new Promise((resolve,reject) => resolve(quickApplications))
+): Promise<DirectoryType> => new Promise((resolve,reject) => resolve(directory))
 
-const getQuickApplications = (
+const getDirectory = (
   universityId: number,
-): Promise<GetQuickApplicationsResponse> => fetchGet<GetQuickApplicationsResponse>(`/university/${universityId}/quick-applications`)
+): Promise<DirectoryType | undefined> => fetchGet<DirectoryType>(`/university/${universityId}/directory`)
   .pipe(
     map((response) => response.data),
     catchApiError(),
   ).toPromise();
 
-const useQuickApplications = (): UseQueryResult<QuickApplicaton[], ApiError> => {
+const useQuickApplications = (): UseQueryResult<DirectoryType, ApiError> => {
   const {data: university} = useUniversity();
   const universityId = university?.id;
-  return useQuery(["university", universityId, "quick-applications"], () => getQuickApplicationsMock(universityId!), {
+  return useQuery(["university", universityId, "directory"], () => getDirectoryMock(universityId!), {
     ...cachedQueryOptions,
     enabled: !!universityId
   });

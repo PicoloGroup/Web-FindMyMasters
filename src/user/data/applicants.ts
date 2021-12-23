@@ -1,4 +1,7 @@
+import { QuickApplicaton } from "../models/quick-app.model"
 import { Student } from "../models/student.model"
+import { University } from "../models/university.model"
+import masterPrograms from "./master-programs"
 
 export const students: Student[] = [
     {
@@ -236,54 +239,195 @@ export const students: Student[] = [
     },
 ]
 
+const university: University = {
+    id: 0,
+    name: "Koc University",
+    cityId: 809,
+    image: "https://keystoneacademic-res.cloudinary.com/image/upload/a_0/e_trim:10:white/f_auto,q_auto,h_56/element/90/90334_thumb.png",
+    rank: null
+}
+
+export const quickApplications: QuickApplicaton[] = [
+    {
+        student: students[0],
+        masterProgram: masterPrograms[2],
+        university: university
+    },
+    {
+        student: students[1],
+        masterProgram: masterPrograms[2],
+        university: university
+    },
+    {
+        student: students[2],
+        masterProgram: masterPrograms[3],
+        university: university
+    },
+    {
+        student: students[3],
+        masterProgram: masterPrograms[1],
+        university: university
+    },
+    {
+        student: students[4],
+        masterProgram: masterPrograms[0],
+        university: university
+    },
+    {
+        student: students[5],
+        masterProgram: masterPrograms[4],
+        university: university
+    },
+    {
+        student: students[6],
+        masterProgram: masterPrograms[2],
+        university: university
+    },
+    {
+        student: students[7],
+        masterProgram: masterPrograms[3],
+        university: university
+    },
+    {
+        student: students[8],
+        masterProgram: masterPrograms[1],
+        university: university
+    },
+    {
+        student: students[9],
+        masterProgram: masterPrograms[4],
+        university: university
+    },
+    {
+        student: students[10],
+        masterProgram: masterPrograms[3],
+        university: university
+    },
+    {
+        student: students[11],
+        masterProgram: masterPrograms[4],
+        university: university
+    },
+    {
+        student: students[12],
+        masterProgram: masterPrograms[2],
+        university: university
+    },
+    {
+        student: students[13],
+        masterProgram: masterPrograms[2],
+        university: university
+    },
+    {
+        student: students[14],
+        masterProgram: masterPrograms[1],
+        university: university
+    },
+    {
+        student: students[15],
+        masterProgram: masterPrograms[3],
+        university: university
+    },
+    {
+        student: students[16],
+        masterProgram: masterPrograms[1],
+        university: university
+    },
+    {
+        student: students[17],
+        masterProgram: masterPrograms[4],
+        university: university
+    },
+    {
+        student: students[18],
+        masterProgram: masterPrograms[0],
+        university: university
+    },
+    {
+        student: students[19],
+        masterProgram: masterPrograms[1],
+        university: university
+    },
+    {
+        student: students[20],
+        masterProgram: masterPrograms[0],
+        university: university
+    },
+    {
+        student: students[21],
+        masterProgram: masterPrograms[2],
+        university: university
+    },
+    {
+        student: students[22],
+        masterProgram: masterPrograms[4],
+        university: university
+    },
+    {
+        student: students[23],
+        masterProgram: masterPrograms[1],
+        university: university
+    },
+    {
+        student: students[24],
+        masterProgram: masterPrograms[1],
+        university: university
+    },
+    {
+        student: students[25],
+        masterProgram: masterPrograms[0],
+        university: university
+    },
+]
+
 export interface DirectoryType {
-    [key: string]: Student[]
+    [key: string]: QuickApplicaton[]
 }
 export const directory: DirectoryType = {
     A: [
-        students[0],
-        students[1],
-        students[2],
-        students[3]
+        quickApplications[0],
+        quickApplications[1],
+        quickApplications[2],
+        quickApplications[3]
     ],
     B: [
-        students[4],
-        students[5],
-        students[6]
+        quickApplications[4],
+        quickApplications[5],
+        quickApplications[6]
     ],
     C: [
-        students[7],
-        students[8]
+        quickApplications[7],
+        quickApplications[8]
     ],
     E: [
-        students[9],
-        students[10],
-        students[11],
-        students[12]
+        quickApplications[9],
+        quickApplications[10],
+        quickApplications[11],
+        quickApplications[12]
     ],
     G: [
-        students[13],
-        students[14]
+        quickApplications[13],
+        quickApplications[14]
     ],
     M: [
-        students[15],
-        students[16],
-        students[17]
+        quickApplications[15],
+        quickApplications[16],
+        quickApplications[17]
     ],
     S: [
-        students[18],
-        students[19]
+        quickApplications[18],
+        quickApplications[19]
     ],
     T: [
-        students[20],
-        students[21],
-        students[22]
+        quickApplications[20],
+        quickApplications[21],
+        quickApplications[22]
     ],
     W: [
-        students[23],
-        students[24]
+        quickApplications[23],
+        quickApplications[24]
     ],
     Y: [
-        students[25]
+        quickApplications[25]
     ]
 }
