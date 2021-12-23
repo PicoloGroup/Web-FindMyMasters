@@ -16,8 +16,10 @@ import {
 import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
 import logoSvg from "../../resources/logo.svg";
 import useLogout from '../hooks/useLogout';
+import useUser from '../../user/hooks/useUser';
+import { CircularProgress } from '@mui/material';
 
-const user = {
+const mockUser = {
   name: 'Tom Cook',
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
@@ -306,14 +308,32 @@ function classNames(...classes: any[]) {
 }
 
 const DashboardHomePage: React.FC = () => {
+    let isFetching = false;
+    const { status: userStatus, data: user, error: userError, isFetching: userIsFetching } = useUser();
+    isFetching = isFetching || userIsFetching;
+
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     const {
-      mutate: logout, status, data, error,
+      mutate: logout, status: logoutStatus, error: logoutError,
     } = useLogout();
 
     const logoutSubmit = (event: React.MouseEvent<HTMLAnchorElement>) => {
       logout({});
+    }
+
+    if(isFetching) {
+      return (
+        <CircularProgress
+          style={{
+            position: 'absolute',
+            top: 'calc(50% - 32px)',
+            left: 'calc(50% - 32px)',
+          }}
+          size={64}
+          data-testid="progress-indicator"
+        />
+      );
     }
 
     return (
@@ -419,10 +439,11 @@ const DashboardHomePage: React.FC = () => {
                     <div className="flex-shrink-0 group block">
                       <div className="flex items-center">
                         <div>
-                          <img className="inline-block h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                          <img className="inline-block h-10 w-10 rounded-full" src={logoSvg} alt="" />
                         </div>
                         <div className="ml-3">
-                          <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">{user.name}</p>
+                          {/* TODO: Add actual name of the university admin when we can get that from backend */}
+                          <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">{user?.firstname}{" "}{user?.lastname}</p>
                         </div>
                       </div>
                     </div>
@@ -496,10 +517,10 @@ const DashboardHomePage: React.FC = () => {
                   <div className="flex-shrink-0 w-full group block">
                     <div className="flex items-center">
                       <div>
-                        <img className="inline-block h-9 w-9 rounded-full" src={user.imageUrl} alt="" />
+                        <img className="inline-block h-9 w-9 rounded-full" src={logoSvg} alt="" />
                       </div>
                       <div className="ml-3">
-                        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user.name}</p>
+                        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user?.firstname}{" "}{user?.lastname}</p>
                       </div>
                     </div>
                   </div>

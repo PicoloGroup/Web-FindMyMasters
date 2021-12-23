@@ -1,7 +1,8 @@
 export interface User {
   id: number;
   username: string;
-  email: string;
-  emailVerified: boolean;
-  registrationDate: Date | null; // ISO Date
+  firstname: string;
+  lastname: string;
+  userId: number;
+  universityId: number;
 }
