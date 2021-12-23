@@ -416,17 +416,16 @@ const DashboardHomePage: React.FC = () => {
                     </nav>
                   </div>
                   <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-                    <a href="#" className="flex-shrink-0 group block">
+                    <div className="flex-shrink-0 group block">
                       <div className="flex items-center">
                         <div>
                           <img className="inline-block h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
                         </div>
                         <div className="ml-3">
                           <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">{user.name}</p>
-                          <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
                         </div>
                       </div>
-                    </a>
+                    </div>
                   </div>
                 </div>
               </Transition.Child>
@@ -494,17 +493,16 @@ const DashboardHomePage: React.FC = () => {
                   </nav>
                 </div>
                 <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-                  <a href="#" className="flex-shrink-0 w-full group block">
+                  <div className="flex-shrink-0 w-full group block">
                     <div className="flex items-center">
                       <div>
                         <img className="inline-block h-9 w-9 rounded-full" src={user.imageUrl} alt="" />
                       </div>
                       <div className="ml-3">
                         <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user.name}</p>
-                        <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -542,7 +540,7 @@ const DashboardHomePage: React.FC = () => {
                 <nav className="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
                   <a href="#" className="inline-flex items-center space-x-3 text-sm font-medium text-gray-900">
                     <ChevronLeftIcon className="-ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
-                    <span>Directory</span>
+                    <span>All Applicants</span>
                   </a>
                 </nav>
   
@@ -660,8 +658,8 @@ const DashboardHomePage: React.FC = () => {
               </main>
               <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
                 <div className="px-6 pt-6 pb-4">
-                  <h2 className="text-lg font-medium text-gray-900">Directory</h2>
-                  <p className="mt-1 text-sm text-gray-600">Search directory of 3,018 employees</p>
+                  <h2 className="text-lg font-medium text-gray-900">Applicants</h2>
+                  <p className="mt-1 text-sm text-gray-600">Search between 3,018 applicants</p>
                   <form className="mt-6 flex space-x-4" action="#">
                     <div className="flex-1 min-w-0">
                       <label htmlFor="search" className="sr-only">
