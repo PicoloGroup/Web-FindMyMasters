@@ -1,12 +1,11 @@
 import { map } from 'rxjs/operators';
 import {
-  UseMutationResult, useMutation, useQueryClient, QueryFunction, UseQueryResult, useQuery, QueryKey,
+  UseQueryResult, useQuery,
 } from 'react-query';
 import { fetchGet } from '../../common/fetch';
 import catchApiError from '../../common/operators/catchApiError';
 import ApiError from '../../common/models/api-error';
 import { cachedQueryOptions } from '../../common/queryOptions';
-import { MasterProgram } from '../models/mprogram.model';
 import { GetStudentResponse } from '../models/response/GetStudentResponse';
 import { Student } from '../models/student.model';
 

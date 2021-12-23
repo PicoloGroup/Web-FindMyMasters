@@ -1,6 +1,6 @@
 import { map } from 'rxjs/operators';
 import {
-  UseMutationResult, useMutation, useQueryClient, QueryFunction, UseQueryResult, useQuery,
+  QueryFunction, UseQueryResult, useQuery,
 } from 'react-query';
 import { User } from '../models/user.model';
 import { fetchGet } from '../../common/fetch';
