@@ -18,6 +18,7 @@ import logoSvg from "../../resources/logo.svg";
 import useLogout from '../hooks/useLogout';
 import useUser from '../../user/hooks/useUser';
 import { CircularProgress } from '@mui/material';
+import useUniversity from '../../user/hooks/useUniversity';
 
 const mockUser = {
   name: 'Tom Cook',
@@ -311,6 +312,8 @@ const DashboardHomePage: React.FC = () => {
     let isFetching = false;
     const { status: userStatus, data: user, error: userError, isFetching: userIsFetching } = useUser();
     isFetching = isFetching || userIsFetching;
+    const { status: universityStatus, data: university, error: universityError, isFetching: universityIsFetching } = useUniversity();
+    isFetching = isFetching || universityIsFetching;
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -439,11 +442,11 @@ const DashboardHomePage: React.FC = () => {
                     <div className="flex-shrink-0 group block">
                       <div className="flex items-center">
                         <div>
-                          <img className="inline-block h-10 w-10 rounded-full" src={logoSvg} alt="" />
+                          <img className="inline-block h-10 w-10 rounded-full" src={university?.image ?? logoSvg} alt="" />
                         </div>
                         <div className="ml-3">
-                          {/* TODO: Add actual name of the university admin when we can get that from backend */}
                           <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">{user?.firstname}{" "}{user?.lastname}</p>
+                          <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">{university?.name}</p>
                         </div>
                       </div>
                     </div>
@@ -517,10 +520,11 @@ const DashboardHomePage: React.FC = () => {
                   <div className="flex-shrink-0 w-full group block">
                     <div className="flex items-center">
                       <div>
-                        <img className="inline-block h-9 w-9 rounded-full" src={logoSvg} alt="" />
+                        <img className="inline-block h-9 w-9 rounded-full" src={university?.image ?? logoSvg} alt="" />
                       </div>
                       <div className="ml-3">
                         <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user?.firstname}{" "}{user?.lastname}</p>
+                        <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">{university?.name}</p>
                       </div>
                     </div>
                   </div>
