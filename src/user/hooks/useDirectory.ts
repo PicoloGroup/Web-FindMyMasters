@@ -21,7 +21,7 @@ const getDirectory = (
     catchApiError(),
   ).toPromise();
 
-const useQuickApplications = (): UseQueryResult<DirectoryType, ApiError> => {
+const useDirectory = (): UseQueryResult<DirectoryType, ApiError> => {
   const {data: university} = useUniversity();
   const universityId = university?.id;
   return useQuery(["university", universityId, "directory"], () => getDirectoryMock(universityId!), {
@@ -30,4 +30,4 @@ const useQuickApplications = (): UseQueryResult<DirectoryType, ApiError> => {
   });
 };
 
-export default useQuickApplications;
+export default useDirectory;

@@ -1,4 +1,4 @@
-import { Fragment, MouseEventHandler, useState } from 'react'
+import React, { Fragment, MouseEventHandler, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   CalendarIcon,
@@ -20,6 +20,8 @@ import useUser from '../../user/hooks/useUser';
 import { CircularProgress } from '@mui/material';
 import useUniversity from '../../user/hooks/useUniversity';
 import useDirectory from '../../user/hooks/useDirectory';
+import useQuickApplicant from '../../user/hooks/useApplicant';
+import useQuickApplications from '../../user/hooks/useQuickApplications';
 
 
 const coverImageUrl = 'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80';
@@ -66,7 +68,11 @@ const DashboardHomePage: React.FC = () => {
     const { status: directoryStatus, data: directory, error: directoryError, isFetching: directoryIsFetching } = useDirectory();
     isFetching = isFetching || directoryIsFetching;
 
-    const profile = directory?.A[0];
+    const [id, setId] = useState(0);
+    const { status: profilesStatus, data: profiles, error: profilesError, isFetching: profilesIsFetching } = useQuickApplications();
+    isFetching = isFetching || profilesIsFetching;
+
+    const profile = profiles?.[id];
     const fields: FieldsType | undefined = profile ? {
         Email: profile.student.email,
         "Birth Date": profile.student.birthdate?.toLocaleDateString("en-US") ?? "",
@@ -88,6 +94,13 @@ const DashboardHomePage: React.FC = () => {
 
     const logoutSubmit = (event: React.MouseEvent<HTMLAnchorElement>) => {
       logout({});
+    }
+
+    const changeApplicant = (event: React.MouseEvent<HTMLAnchorElement>, id: number) => {
+      event.preventDefault();
+
+      setId(id);
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });     
     }
 
     if(isFetching) {
@@ -445,7 +458,7 @@ const DashboardHomePage: React.FC = () => {
                                 <img className="h-10 w-10 rounded-full" src={person.student.image} alt="" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <a href="#" className="focus:outline-none">
+                                <a href="#" onClick={(event) => changeApplicant(event, person.student.id)} className="focus:outline-none">
                                   {/* Extend touch target to entire panel */}
                                   <span className="absolute inset-0" aria-hidden="true" />
                                   <p className="text-sm font-medium text-gray-900">{person.student.firstname} {" "} {person.student.lastname}</p>
