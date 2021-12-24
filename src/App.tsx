@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import AuthContainer from './auth/AuthContainer';
+import DashboardContainer from './dashboard/DashboardContainer';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import PrivateRoute from './util/PrivateRoute';
 
-function App() {
+const queryClient = new QueryClient()
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Switch>
+          <PrivateRoute path="/dashboard" component={DashboardContainer} />
+          <Route path="/auth" component={AuthContainer} />
+          <Route path="*">
+            <Redirect to="/dashboard" />
+          </Route>
+        </Switch>
+        
+      </Router>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;
